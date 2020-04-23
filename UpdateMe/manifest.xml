@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<PluginManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Name>NH_UpdateMe</Name>
+  <Guid>712c1aa5-e281-47d2-a518-660b33559fb1</Guid>
+  <Version>v1.0.0</Version>
+</PluginManifest>

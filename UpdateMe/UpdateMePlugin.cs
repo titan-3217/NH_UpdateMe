@@ -90,7 +90,7 @@ namespace UpdateMe
 
             this._config.Data.SetLoaded(this);
             UpdateMePlugin.Log.Debug("UpdateMe config loaded.");
-
+            /*
             try
             {
                 GameVersion = new MyVersion(MyPerGameSettings.BasicGameInfo.GameVersion.Value);
@@ -99,7 +99,7 @@ namespace UpdateMe
             {
                 Util.Log(string.Concat("UpdateMe catched an exception! - MyVersion", ex, ex.StackTrace));
             }
-
+            */
             myTimer = new Timer();
             myTimer.Enabled = false;
 

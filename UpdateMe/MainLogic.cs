@@ -54,9 +54,9 @@ namespace UpdateMe
                             if (!UpdateMePlugin.Instance._logic._processing)
                             {
                                 UpdateMePlugin.Instance._logic._processing = true;
-                                Util.setUpAndRunGuardian();
+                                //Util.setUpAndRunGuardian(); //-->Not ready yet.
 
-                                if (!Util.checkDSUpdatesByDate())
+                                if (!Util.checkDSUpdatesByAppInfo())
                                     Util.checkTorchUpdatesAsync();
                             }
                         }

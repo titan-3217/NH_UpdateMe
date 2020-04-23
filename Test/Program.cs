@@ -95,6 +95,7 @@ quit";
             {
                 if (true)
                 {
+                    /*
                     myTimer = new Timer();
                     myTimer.Enabled = false;
 
@@ -106,7 +107,7 @@ quit";
                     msgTimer.Start();
 
                     while (true) ;
-
+                    */
                     #region steamcmd
 
                     string STEAMCMD_DIR = @"C:\Torch\" + "steamcmd";
@@ -127,7 +128,7 @@ app_info_print 298740";
 
                         if (File.Exists(STEAMCMD_PATH))
                         {
-                            string lastRemoteDate = "";
+                            string lastRemoteInfo = "";
                             //UpdateMePlugin.Instance.GameVersion
                             using (System.Diagnostics.Process p = new System.Diagnostics.Process())
                             {
@@ -141,9 +142,10 @@ app_info_print 298740";
                                 string output = p.StandardOutput.ReadToEnd();
                                 p.WaitForExit();
 
-                                string dateStart = "last change :", dateEnd = "\r\n";
-                                output = output.Substring(output.IndexOf(dateStart)).Substring(0, output.IndexOf(dateEnd));
-                                lastRemoteDate = output.Replace(dateStart, "").Replace(dateEnd, "").Replace("\"", "").TrimStart().TrimEnd();
+                                string infoStart = "change number :", infoEnd = ",";
+                                output = output.Substring(output.IndexOf(infoStart));
+                                output = output.Substring(0, output.IndexOf(infoEnd));
+                                lastRemoteInfo = output.Replace(infoStart, "").Replace(infoEnd, "").Replace("\"", "").TrimStart().TrimEnd();
 
                                 //DateTime dateTime = DateTime.ParseExact(date, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.CreateSpecificCulture("en-US"));
 
@@ -154,18 +156,20 @@ app_info_print 298740";
                             string ctrlFile = Path.Combine(STEAMCMD_DIR, "updatemeds.txt");
 
                             if (!File.Exists(ctrlFile))
-                                File.WriteAllText(ctrlFile, lastRemoteDate);
+                                File.WriteAllText(ctrlFile, lastRemoteInfo);
                             else
                             {
-                                string lastLocalDate = "";
+                                string lastLocalInfo = "";
                                 using (StreamReader sr = File.OpenText(ctrlFile))
                                 {
-                                    lastLocalDate = sr.ReadLine().TrimStart().TrimEnd();
+                                    lastLocalInfo = sr.ReadLine().TrimStart().TrimEnd();
                                 }
 
-                                if (lastLocalDate != lastRemoteDate)
+                                if (lastLocalInfo != lastRemoteInfo)
                                 {
+                                    File.Delete(ctrlFile);
                                     //Util.SendMessage(UpdateMePlugin.Instance.Config.MessageForNewDSVersion);
+                                    //Util.Log(UpdateMePlugin.Instance.Config.MessageForNewDSVersion);
                                     //UpdateMePlugin.Instance.setUpAndStartTimers();
                                     exit = true;
                                 }

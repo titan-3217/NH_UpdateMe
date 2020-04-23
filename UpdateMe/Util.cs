@@ -186,7 +186,7 @@ quit";
         {
             //Torch.API.ServerState.Error
             //Util.Log("GameVersion_BUILDID: " + UpdateMePlugin.Instance.GameVersion.Build);
-            Util.SendMessage("GameVersion_BUILDID: " + UpdateMePlugin.Instance.GameVersion.Build);
+            //Util.SendMessage("GameVersion_BUILDID: " + UpdateMePlugin.Instance.GameVersion.Build);
         }
 
         private static bool filesAreDifferent(string file1, string file2)
@@ -195,7 +195,7 @@ quit";
                         !File.ReadAllBytes(file1).SequenceEqual(File.ReadAllBytes(file2));
         }
 
-        public static bool checkDSUpdatesByDate()
+        public static bool checkDSUpdatesByAppInfo()
         {
             bool exit = false;
             try
@@ -209,7 +209,7 @@ quit";
                     {
                         //UpdateMePlugin.Instance.GameVersion
                         //DateTime updateDate;
-                        string lastRemoteDate = "";
+                        string lastRemoteInfo = "";
 
                         using (System.Diagnostics.Process p = new System.Diagnostics.Process())
                         {
@@ -224,25 +224,25 @@ quit";
                             string output = p.StandardOutput.ReadToEnd();
                             p.WaitForExit();
 
-                            string dateStart = "last change :", dateEnd = "\r\n";
-                            output = output.Substring(output.IndexOf(dateStart)).Substring(0, output.IndexOf(dateEnd));
-                            lastRemoteDate = output.Replace(dateStart, "").Replace(dateEnd, "").Replace("\"", "").TrimStart().TrimEnd();
-                            //updateDate = DateTime.ParseExact(date, "ddd MMM dd HH:mm:ss yyyy", CultureInfo.CreateSpecificCulture("en-US"));
+                            string infoStart = "change number :", infoEnd = ",";
+                            output = output.Substring(output.IndexOf(infoStart));
+                            output = output.Substring(0, output.IndexOf(infoEnd));
+                            lastRemoteInfo = output.Replace(infoStart, "").Replace(infoEnd, "").Replace("\"", "").TrimStart().TrimEnd();
                         }
 
                         string ctrlFile = Path.Combine(STEAMCMD_DIR, "updatemeds.txt");
                         
                         if (!File.Exists(ctrlFile))
-                            File.WriteAllText(ctrlFile, lastRemoteDate);
+                            File.WriteAllText(ctrlFile, lastRemoteInfo);
                         else
                         {
-                            string lastLocalDate = "";
+                            string lastLocalInfo = "";
                             using (StreamReader sr = File.OpenText(ctrlFile))
                             {
-                                lastLocalDate = sr.ReadLine().TrimStart().TrimEnd();
+                                lastLocalInfo = sr.ReadLine().TrimStart().TrimEnd();
                             }
 
-                            if (lastLocalDate != lastRemoteDate)
+                            if (lastLocalInfo != lastRemoteInfo)
                             {
                                 File.Delete(ctrlFile);
                                 Util.SendMessage(UpdateMePlugin.Instance.Config.MessageForNewDSVersion);
@@ -264,22 +264,29 @@ quit";
 
         public static void setUpAndRunGuardian()
         {
-            //Check here if UpdateMeGuardian.exe process is running already.
-            if (true)
+            try
             {
-                //Check if UpdateMeGuardian.exe exists in Torch work directory. If not, unzip it and extract it there.
-
-                using (Process p = new Process())
+                //Check here if UpdateMeGuardian.exe process is running already.
+                if (true)
                 {
-                    p.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "UpdateMeGuardian.exe");
-                    p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                    p.StartInfo.CreateNoWindow = true;
-                    p.StartInfo.UseShellExecute = false;
-                    p.StartInfo.RedirectStandardOutput = true;
-                    p.StartInfo.RedirectStandardError = true;
-                    p.Start();
-                    p.WaitForExit();
+                    //Check if UpdateMeGuardian.exe exists in Torch work directory. If not, unzip it and extract it there.
+
+                    using (Process p = new Process())
+                    {
+                        p.StartInfo.FileName = Path.Combine(Directory.GetCurrentDirectory(), "UpdateMeGuardian.exe");
+                        p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                        p.StartInfo.CreateNoWindow = true;
+                        p.StartInfo.UseShellExecute = false;
+                        p.StartInfo.RedirectStandardOutput = true;
+                        p.StartInfo.RedirectStandardError = true;
+                        p.Start();
+                        p.WaitForExit();
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                Util.Log(string.Concat("UpdateMe catched an exception!", ex, ex.StackTrace));
             }
         }
     }
