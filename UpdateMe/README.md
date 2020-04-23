@@ -4,7 +4,7 @@
 v1.0
 
 This is a free to use UNOFFICIAL Torch plugin for Space Engineers DS.
-Feel freely to use, modify, publish and republish this plugin as long as you include a public visible mention of their authors and collaborators.
+Feel free to use, modify, publish and republish this plugin as long as you include a public visible mention of their authors and collaborators.
 You can suggest and/or implement new features or fixes and you will be added as collaborator or author.
 
 
