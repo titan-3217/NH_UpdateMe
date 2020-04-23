@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29905.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Events", "Events\Events.csproj", "{88BE7B39-1509-40E7-B115-7DB0AAA40133}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UpdateMe", "UpdateMe\UpdateMe.csproj", "{712C1AA5-E281-47D2-A518-660B33559FB1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{5ECAFD25-C385-476F-99DA-A359BDAB4717}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{88BE7B39-1509-40E7-B115-7DB0AAA40133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88BE7B39-1509-40E7-B115-7DB0AAA40133}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88BE7B39-1509-40E7-B115-7DB0AAA40133}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88BE7B39-1509-40E7-B115-7DB0AAA40133}.Release|Any CPU.Build.0 = Release|Any CPU
 		{712C1AA5-E281-47D2-A518-660B33559FB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{712C1AA5-E281-47D2-A518-660B33559FB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{712C1AA5-E281-47D2-A518-660B33559FB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
