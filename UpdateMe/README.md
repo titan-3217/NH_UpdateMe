@@ -43,7 +43,6 @@ TODO:
 -----
 
 - Handle case when a new DS version brakes Torch so a manual installation of Torch.Server will be required.
-- I would like to see a feature like this included by default in Torch or Torch 2 in benefit of all SE community :)
 
 
 
