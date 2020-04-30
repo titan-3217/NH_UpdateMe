@@ -211,10 +211,13 @@ quit";
                         //DateTime updateDate;
                         string lastRemoteInfo = "";
 
+                        //It needs an improovement here. For some reason steamcmd app_info_update isn't updating the cache info until I run app_update command.
+                        //So, lets update cache first, it shouldn't affect a running instance of Torch.
                         using (System.Diagnostics.Process p = new System.Diagnostics.Process())
                         {
+                            //"+login anonymous +app_info_update 1 +app_info_print 298740 +quit" //-->This command ins't enough to force cache update.
                             p.StartInfo.FileName = Path.Combine(STEAMCMD_DIR, "steamcmd.exe");
-                            p.StartInfo.Arguments = "+login anonymous +app_info_update 1 +app_info_print 298740 +quit";
+                            p.StartInfo.Arguments = "+login anonymous +force_install_dir ../ +app_update 298740 +app_info_update 1 +app_info_print 298740 +quit";
                             p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
                             p.StartInfo.CreateNoWindow = true;
                             p.StartInfo.UseShellExecute = false;

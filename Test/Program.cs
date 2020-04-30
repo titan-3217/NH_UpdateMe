@@ -16,17 +16,32 @@ namespace Test
     {
         public static Timer myTimer, msgTimer;
         public static Stopwatch stopWatch;
+        private static int _counter = 1000;
 
         static void Main(string[] args)
         {
+            //Test1();
             checkDSUpdates();
             //autoUpdateDS();
+        }
+
+        static void Test1()
+        {
+            while (true)
+            {
+                if (++_counter % 10000 == 0)
+                {
+
+                    _counter = 0;
+                }
+            }
         }
 
         static void autoUpdateDS()
         {
             try
             {
+
                 string STEAMCMD_DIR = @"C:\Torch\"+"steamcmd";
                 string STEAMCMD_PATH = $"{STEAMCMD_DIR}\\steamcmd.exe";
                 string RUNSCRIPT_PATH = $"{STEAMCMD_DIR}\\updateme.txt";
@@ -119,9 +134,6 @@ quit";
                                     app_update 298740
                                     quit";
                     */
-                    string RUNSCRIPT = @"login anonymous
-app_info_update 1 
-app_info_print 298740";
 
                     if (Directory.Exists(STEAMCMD_DIR))
                     {
@@ -133,7 +145,7 @@ app_info_print 298740";
                             using (System.Diagnostics.Process p = new System.Diagnostics.Process())
                             {
                                 p.StartInfo.FileName = Path.Combine(@"C:\Torch\", STEAMCMD_PATH);
-                                p.StartInfo.Arguments = "+login anonymous +app_info_update 1 +app_info_print 298740 +quit";//"+runscript updateme.txt";
+                                p.StartInfo.Arguments = "+login anonymous +force_install_dir ../ +app_update 298740 +app_info_update 1 +app_info_print 298740 +quit";//"+runscript updateme.txt";
                                 p.StartInfo.CreateNoWindow = true;
                                 p.StartInfo.UseShellExecute = false;
                                 p.StartInfo.RedirectStandardOutput = true;
